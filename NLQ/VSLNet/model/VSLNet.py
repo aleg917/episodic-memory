@@ -87,7 +87,7 @@ class VSLNet(nn.Module):
             # init parameters
             self.init_parameters()
             self.embedding_net = BertEmbedding(configs.text_agnostic)
-        elif self.configs.predictor == "glove":
+        else:
             self.embedding_net = Embedding(
                 num_words=configs.word_size,
                 num_chars=configs.char_size,
@@ -120,7 +120,7 @@ class VSLNet(nn.Module):
         if self.configs.predictor == "bert":
             query_features = self.embedding_net(word_ids)
             query_features = self.query_affine(query_features)
-        elif self.configs.predictor == "glove":
+        else:
             query_features = self.embedding_net(word_ids, char_ids)
 
         query_features = self.feature_encoder(query_features, mask=q_mask)
