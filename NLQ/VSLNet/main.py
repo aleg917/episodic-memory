@@ -26,6 +26,9 @@ from utils.runner_utils import (
 def main(configs, parser):
     print(f"Running with {configs}", flush=True)
 
+    print(">>> TEST: Sto usando la versione MODIFICATA di main.py <<<", flush=True)
+
+
     # set tensorflow configs
     set_th_config(configs.seed)
 
