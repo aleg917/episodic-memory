@@ -26,6 +26,8 @@ from utils.runner_utils import (
 def main(configs, parser):
     print(f"Running with {configs}", flush=True)
 
+    print(">>> TEST: Sto usando la versione MODIFICATA di main.py <<<", flush=True)
+
     # set tensorflow configs
     set_th_config(configs.seed)
 
@@ -101,6 +103,12 @@ def main(configs, parser):
         model = VSLNet(
             configs=configs, word_vectors=dataset.get("word_vector", None)
         ).to(device)
+
+        # Load pretrained weights if specified
+        if configs.pretrained_model_path is not None and os.path.exists(configs.pretrained_model_path):
+            print(f"Loading pretrained weights from {configs.pretrained_model_path}")
+            model.load_state_dict(torch.load(configs.pretrained_model_path, map_location=device))
+            
         optimizer, scheduler = build_optimizer_and_scheduler(model, configs=configs)
         # start training
         best_metric = -1.0
