@@ -122,6 +122,7 @@ def read_command_line():
         help="path to save trained model weights",
     )
     parser.add_argument("--model_name", type=str, default="vslnet", help="model name")  # noqa
+    parser.add_argument("--pretrained_model_path", type=str, default=None, help="Path to the pretrained model to load.")
     parser.add_argument(
         "--suffix",
         type=str,
